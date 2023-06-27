@@ -1,0 +1,78 @@
+const url = "https://api.dictionaryapi.dev/api/v2/entries/en/";
+const result = document.getElementById("result");
+const sound = document.getElementById("sound");
+const btn = document.getElementById("search-btn");
+const input = document.getElementById("search-input");
+
+const fetchCall = async () => {
+  let searchInput = document.getElementById("search-input").value;
+
+  const response = await fetch(`${url}${searchInput}`);
+  return response;
+};
+
+input.addEventListener("change", () => {
+  let searchInput = document.getElementById("search-input").value;
+  result.innerHTML = "";
+  fetchCall()
+    .then((response) => response.json())
+    .then((data) => {
+      // console.log(data);
+      for (let i = 0; i < data.length; i++) {
+        const datas = data[i];
+        result.innerHTML += `<div class="word">
+                        <h3>${searchInput}</h3>
+
+                        <div class="details" id='voice'>
+                            <p class="pronounciation" id='punitTik'>${datas.phonetic}</p>
+                            <button class="audio-button" onclick="playSound()"><i class="fa-solid fa-volume-up"></i></button>
+                        </div>`;
+        i = data.length;
+
+        for (let j = 0; j < datas.meanings.length; j++) {
+          const meaningss = datas.meanings[j];
+          result.innerHTML += `<h4>${meaningss.partOfSpeech}</h4>
+                    </div>`;
+
+          for (let k = 0; k < meaningss.definitions.length; k++) {
+            const definitionss = meaningss.definitions[k];
+            result.innerHTML += `<div class="word-definition">
+                                <p class="meaning">${definitionss.definition}</p>`;
+            if (definitionss.example == undefined) {
+              result.innerHTML += `<p class="example">No Example</p>`;
+            } else {
+              result.innerHTML += `<p class="example">${definitionss.example}</p>`;
+            }
+            result.innerHTML += `</div>`;
+          }
+        }
+        if (datas.phonetics.length > 0) {
+          document.getElementById("voice").style.display = "block";
+
+          for (let m = 0; m < datas.phonetics.length; m++) {
+            const pronuonciation = datas.phonetics[m];
+            if (pronuonciation.audio.length > 0) {
+              document.getElementById("voice").style.display = "block";
+              sound.setAttribute("src", pronuonciation.audio);
+              m = datas.phonetics.length;
+            } else {
+              sound.setAttribute("src", "");
+              document.getElementById("voice").style.display = "none";
+            }
+          }
+        } else {
+          sound.setAttribute("src", "");
+          document.getElementById("voice").style.display = "none";
+        }
+      }
+    });
+});
+
+function clearInput() {
+  document.getElementById("search-input").value = "";
+  result.innerHTML = ``;
+}
+
+function playSound() {
+  sound.play();
+}

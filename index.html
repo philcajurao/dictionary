@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="shortcut icon" href="img/colored-logo.png">
+
+    <script src="https://kit.fontawesome.com/067d14b27b.js" crossorigin="anonymous"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+        <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+      />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+    <link rel="stylesheet" href="styles.css">
+    <title>URSAC Dictionary</title>
+</head>
+
+<body>
+    <audio src="" id="sound"></audio>
+    <div class="container animate__animated animate__bounceInDown">
+        <div class="title">
+            <a href="index.html">
+                <img src="img/logo.png" alt="" class="logo"> <img>URSAC Dictionary</img> 
+            </a>
+        </div>
+        <div class="search-container">
+            <div class="input-container">
+                <input type="text" id="search-input" class="search-input" placeholder="search here...">
+                <i class="fa-solid fa-xmark" onclick="clearInput()"></i>
+            </div>
+            <button id="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+        </div>
+
+        <div class="results-container" id="result">
+
+        </div>
+    </div>
+    
+
+    <script src="scripts/app.js"></script>
+</body>
+
+</html>
